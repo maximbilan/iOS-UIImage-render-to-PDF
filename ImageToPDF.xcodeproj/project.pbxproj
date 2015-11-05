@@ -13,9 +13,6 @@
 		94181B271BEC050B001546C6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94181B251BEC050B001546C6 /* Main.storyboard */; };
 		94181B291BEC050B001546C6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94181B281BEC050B001546C6 /* Assets.xcassets */; };
 		94181B2C1BEC050B001546C6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94181B2A1BEC050B001546C6 /* LaunchScreen.storyboard */; };
-		94181B361BEC062A001546C6 /* image1.png in Resources */ = {isa = PBXBuildFile; fileRef = 94181B331BEC062A001546C6 /* image1.png */; };
-		94181B371BEC062A001546C6 /* image2.png in Resources */ = {isa = PBXBuildFile; fileRef = 94181B341BEC062A001546C6 /* image2.png */; };
-		94181B381BEC062A001546C6 /* image3.png in Resources */ = {isa = PBXBuildFile; fileRef = 94181B351BEC062A001546C6 /* image3.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,9 +26,6 @@
 		94181B281BEC050B001546C6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		94181B2B1BEC050B001546C6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		94181B2D1BEC050B001546C6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		94181B331BEC062A001546C6 /* image1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image1.png; sourceTree = "<group>"; };
-		94181B341BEC062A001546C6 /* image2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image2.png; sourceTree = "<group>"; };
-		94181B351BEC062A001546C6 /* image3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image3.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,9 +58,6 @@
 		94181B1B1BEC050B001546C6 /* ImageToPDF */ = {
 			isa = PBXGroup;
 			children = (
-				94181B331BEC062A001546C6 /* image1.png */,
-				94181B341BEC062A001546C6 /* image2.png */,
-				94181B351BEC062A001546C6 /* image3.png */,
 				94181B1F1BEC050B001546C6 /* AppDelegate.h */,
 				94181B201BEC050B001546C6 /* AppDelegate.m */,
 				94181B221BEC050B001546C6 /* ViewController.h */,
@@ -146,9 +137,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				94181B2C1BEC050B001546C6 /* LaunchScreen.storyboard in Resources */,
-				94181B381BEC062A001546C6 /* image3.png in Resources */,
-				94181B371BEC062A001546C6 /* image2.png in Resources */,
-				94181B361BEC062A001546C6 /* image1.png in Resources */,
 				94181B291BEC050B001546C6 /* Assets.xcassets in Resources */,
 				94181B271BEC050B001546C6 /* Main.storyboard in Resources */,
 			);

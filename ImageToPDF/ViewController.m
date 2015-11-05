@@ -24,15 +24,14 @@
 	
 	NSLog(@"%@", documentDirectory);
 	
-	UIImage *image1 = [UIImage imageNamed:@"image1.png"];
-	UIImage *image2 = [UIImage imageNamed:@"image2.png"];
-	UIImage *image3 = [UIImage imageNamed:@"image3.png"];
-	
-	NSArray *images = @[image1, image2, image3];
 	NSMutableArray *pdfURLs = [NSMutableArray array];
 	
 	for (NSInteger i = 0; i < 1000; ++i) {
-		UIImage *imageToRender = image1;
+		CGFloat hue = ( arc4random() % 256 / 256.0 );
+		CGFloat saturation = ( arc4random() % 128 / 256.0 ) + 0.5;
+		CGFloat brightness = ( arc4random() % 128 / 256.0 ) + 0.5;
+		UIColor *color = [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:1];
+		UIImage *imageToRender = [self imageFromColor:color];
 		NSString *pdfFile = [NSString stringWithFormat:@"%@_%@.%@", documentDirectoryFilename.stringByDeletingPathExtension, @(i), documentDirectoryFilename.pathExtension];
 		
 		UIGraphicsBeginPDFContextToFile(pdfFile, CGRectMake(0, 0, 1024, 1024), nil);
@@ -45,11 +44,6 @@
 	
 	[self combinePDFURLs:pdfURLs writeToURL:[NSURL fileURLWithPath:documentDirectoryFilename]];
 	
-}
-
-- (void)didReceiveMemoryWarning {
-	[super didReceiveMemoryWarning];
-	// Dispose of any resources that can be recreated.
 }
 
 - (void)combinePDFURLs:(NSArray *)PDFURLs writeToURL:(NSURL *)URL
@@ -74,6 +68,18 @@
 	
 	CGPDFContextClose(context);
 	CGContextRelease(context);
+}
+
+- (UIImage *)imageFromColor:(UIColor *)color
+{
+	CGRect rect = CGRectMake(0, 0, 1024, 1024);
+	UIGraphicsBeginImageContext(rect.size);
+	CGContextRef context = UIGraphicsGetCurrentContext();
+	CGContextSetFillColorWithColor(context, [color CGColor]);
+	CGContextFillRect(context, rect);
+	UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+	UIGraphicsEndImageContext();
+	return image;
 }
 
 @end
