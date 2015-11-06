@@ -26,27 +26,31 @@
 	
 	NSMutableArray *pdfURLs = [NSMutableArray array];
 	
+	NSString *pdfFile = [NSString stringWithFormat:@"%@_%@.%@", documentDirectoryFilename.stringByDeletingPathExtension, @(0), documentDirectoryFilename.pathExtension];
+	
+	UIGraphicsBeginPDFContextToFile(pdfFile, CGRectMake(0, 0, 1024, 1024), nil);
+	
 	for (NSInteger i = 0; i < 1000; ++i) {
 		
-		@autoreleasepool {
+		
 			CGFloat hue = ( arc4random() % 256 / 256.0 );
 			CGFloat saturation = ( arc4random() % 128 / 256.0 ) + 0.5;
 			CGFloat brightness = ( arc4random() % 128 / 256.0 ) + 0.5;
 			UIColor *color = [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:1];
 			UIImage *imageToRender = [self imageFromColor:color];
-			NSString *pdfFile = [NSString stringWithFormat:@"%@_%@.%@", documentDirectoryFilename.stringByDeletingPathExtension, @(i), documentDirectoryFilename.pathExtension];
-			
-			UIGraphicsBeginPDFContextToFile(pdfFile, CGRectMake(0, 0, 1024, 1024), nil);
+		
+		@autoreleasepool {
 			UIGraphicsBeginPDFPage();
 			[imageToRender drawAtPoint:CGPointZero];
-			UIGraphicsEndPDFContext();
-			
-			[pdfURLs addObject:[NSURL fileURLWithPath:pdfFile]];
 		}
+		
+		[pdfURLs addObject:[NSURL fileURLWithPath:pdfFile]];
 		
 	}
 	
-	[self combinePDFURLs:pdfURLs writeToURL:[NSURL fileURLWithPath:documentDirectoryFilename]];
+	UIGraphicsEndPDFContext();
+	
+	//[self combinePDFURLs:pdfURLs writeToURL:[NSURL fileURLWithPath:documentDirectoryFilename]];
 	
 }
 
