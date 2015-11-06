@@ -41,22 +41,6 @@
 			[imageToRender drawAtPoint:CGPointZero];
 			UIGraphicsEndPDFContext();
 			
-			//		NSURL *url = [NSURL fileURLWithPath:pdfFile];
-			//		CGContextRef context = CGPDFContextCreateWithURL((__bridge CFURLRef)url, NULL, NULL);
-			//
-			//		CGPDFDocumentRef document = CGPDFDocumentCreateWithURL((__bridge CFURLRef)url);
-			//
-			//		CGRect mediaBox = CGRectMake(0, 0, 1024, 1024);
-			//
-			//		CGContextBeginPage(context, &mediaBox);
-			//		CGContextDrawImage(context, mediaBox, imageToRender.CGImage);
-			//		CGContextEndPage(context);
-			//
-			//		CGPDFDocumentRelease(document);
-			//
-			//		CGPDFContextClose(context);
-			//		CGContextRelease(context);
-			//
 			[pdfURLs addObject:[NSURL fileURLWithPath:pdfFile]];
 		}
 		
