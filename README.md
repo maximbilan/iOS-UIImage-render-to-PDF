@@ -1,5 +1,7 @@
 # iOS Render UIImage to PDF and merging PDF files
 
+![alt tag](https://raw.github.com/maximbilan/iOS-UIImage-render-to-PDF/master/img/img1.png)
+
 Some code samples for working with PDF. Let’s try to generate 1000 images and render to PDF file. For this we need method for generating random color and method for creating UIImage from UIColor.
 
 Random color:
@@ -30,5 +32,7 @@ And of course, implementation of combinePDFURLs method, see below:
 </pre>
 
 And result:
+
+![alt tag](https://raw.github.com/maximbilan/iOS-UIImage-render-to-PDF/master/img/img2.png)
 
 Happy coding!
