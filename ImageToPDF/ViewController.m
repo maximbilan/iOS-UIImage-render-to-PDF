@@ -27,35 +27,39 @@
 	NSMutableArray *pdfURLs = [NSMutableArray array];
 	
 	for (NSInteger i = 0; i < 1000; ++i) {
-		CGFloat hue = ( arc4random() % 256 / 256.0 );
-		CGFloat saturation = ( arc4random() % 128 / 256.0 ) + 0.5;
-		CGFloat brightness = ( arc4random() % 128 / 256.0 ) + 0.5;
-		UIColor *color = [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:1];
-		UIImage *imageToRender = [self imageFromColor:color];
-		NSString *pdfFile = [NSString stringWithFormat:@"%@_%@.%@", documentDirectoryFilename.stringByDeletingPathExtension, @(i), documentDirectoryFilename.pathExtension];
 		
-//		UIGraphicsBeginPDFContextToFile(pdfFile, CGRectMake(0, 0, 1024, 1024), nil);
-//		UIGraphicsBeginPDFPage();
-//		[imageToRender drawAtPoint:CGPointZero];
-//		UIGraphicsEndPDFContext();
+		@autoreleasepool {
+			CGFloat hue = ( arc4random() % 256 / 256.0 );
+			CGFloat saturation = ( arc4random() % 128 / 256.0 ) + 0.5;
+			CGFloat brightness = ( arc4random() % 128 / 256.0 ) + 0.5;
+			UIColor *color = [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:1];
+			UIImage *imageToRender = [self imageFromColor:color];
+			NSString *pdfFile = [NSString stringWithFormat:@"%@_%@.%@", documentDirectoryFilename.stringByDeletingPathExtension, @(i), documentDirectoryFilename.pathExtension];
+			
+			UIGraphicsBeginPDFContextToFile(pdfFile, CGRectMake(0, 0, 1024, 1024), nil);
+			UIGraphicsBeginPDFPage();
+			[imageToRender drawAtPoint:CGPointZero];
+			UIGraphicsEndPDFContext();
+			
+			//		NSURL *url = [NSURL fileURLWithPath:pdfFile];
+			//		CGContextRef context = CGPDFContextCreateWithURL((__bridge CFURLRef)url, NULL, NULL);
+			//
+			//		CGPDFDocumentRef document = CGPDFDocumentCreateWithURL((__bridge CFURLRef)url);
+			//
+			//		CGRect mediaBox = CGRectMake(0, 0, 1024, 1024);
+			//
+			//		CGContextBeginPage(context, &mediaBox);
+			//		CGContextDrawImage(context, mediaBox, imageToRender.CGImage);
+			//		CGContextEndPage(context);
+			//
+			//		CGPDFDocumentRelease(document);
+			//
+			//		CGPDFContextClose(context);
+			//		CGContextRelease(context);
+			//
+			[pdfURLs addObject:[NSURL fileURLWithPath:pdfFile]];
+		}
 		
-		NSURL *url = [NSURL fileURLWithPath:pdfFile];
-		CGContextRef context = CGPDFContextCreateWithURL((__bridge CFURLRef)url, NULL, NULL);
-		
-		CGPDFDocumentRef document = CGPDFDocumentCreateWithURL((__bridge CFURLRef)url);
-		
-		CGRect mediaBox = CGRectMake(0, 0, 1024, 1024);
-		
-		CGContextBeginPage(context, &mediaBox);
-		CGContextDrawImage(context, mediaBox, imageToRender.CGImage);
-		CGContextEndPage(context);
-		
-		CGPDFDocumentRelease(document);
-		
-		CGPDFContextClose(context);
-		CGContextRelease(context);
-		
-		[pdfURLs addObject:[NSURL fileURLWithPath:pdfFile]];
 	}
 	
 	[self combinePDFURLs:pdfURLs writeToURL:[NSURL fileURLWithPath:documentDirectoryFilename]];
