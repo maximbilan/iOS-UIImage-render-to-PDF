@@ -2,7 +2,7 @@
 
 ![alt tag](https://raw.github.com/maximbilan/iOS-UIImage-render-to-PDF/master/img/img1.png)
 
-Some code samples for working with PDF. Let’s try to generate 1000 images and render to PDF file. For this we need method for generating random color and method for creating UIImage from UIColor.
+Some code samples for working with <i>PDF</i>. Let’s try to generate 1000 images and render to <i>PDF</i> file. For this we need method for generating random color and method for creating <i>UIImage</i> from <i>UIColor</i>.
 
 Random color:
 
@@ -16,7 +16,7 @@ Random color:
 }
 </pre>
 
-And UIImage from UIColor:
+And <i>UIImage</i> from <i>UIColor</i>:
 
 <pre>
 - (UIImage *)imageFromColor:(UIColor *)color
@@ -32,7 +32,7 @@ And UIImage from UIColor:
 }
 </pre>
 
-And now we can render random images to PDF file.
+And now we can render random images to <i>PDF</i> file.
 
 <pre>
 UIGraphicsBeginPDFContextToFile(filename, CGRectMake(0, 0, 1024, 1024), nil);
@@ -49,9 +49,9 @@ for (NSInteger i = 0; i < 1000; ++i) {
 UIGraphicsEndPDFContext();
 </pre>
 
-Attention! Necessarily use @autoreleasepool, otherwise you will have memory leaks.
+<b>Attention!</b> Necessarily use <i>@autoreleasepool</i>, otherwise you will have memory leaks.
 
-Also I would like to provide some sample for generating PDF files and merging these files. It’s also simple.
+Also I would like to provide some sample for generating <i>PDF</i> files and merging these files. It’s also simple.
 
 <pre>
 NSMutableArray *pdfURLs = [NSMutableArray array];
@@ -77,7 +77,7 @@ for (NSURL *pdfUrl in pdfURLs) {
 }
 </pre>
 
-And of course, implementation of combinePDFURLs method, see below:
+And of course, implementation of <i>combinePDFURLs</i> method, see below:
 
 <pre>
 - (void)combinePDFURLs:(NSArray *)PDFURLs writeToURL:(NSURL *)URL
