@@ -17,41 +17,55 @@
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	
-	NSString *aFilename = @"test.pdf";
 	NSArray *documentDirectories = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask,YES);
 	NSString *documentDirectory = [documentDirectories objectAtIndex:0];
+	
+	NSString *aFilename = @"test.pdf";
 	NSString *documentDirectoryFilename = [documentDirectory stringByAppendingPathComponent:aFilename];
 	
 	NSLog(@"%@", documentDirectory);
 	
-	NSMutableArray *pdfURLs = [NSMutableArray array];
+	// Render 1000 UIImage objects to PDF file
 	
-	NSString *pdfFile = [NSString stringWithFormat:@"%@_%@.%@", documentDirectoryFilename.stringByDeletingPathExtension, @(0), documentDirectoryFilename.pathExtension];
-	
-	UIGraphicsBeginPDFContextToFile(pdfFile, CGRectMake(0, 0, 1024, 1024), nil);
+	UIGraphicsBeginPDFContextToFile(documentDirectoryFilename, CGRectMake(0, 0, 1024, 1024), nil);
 	
 	for (NSInteger i = 0; i < 1000; ++i) {
-		
-		
-			CGFloat hue = ( arc4random() % 256 / 256.0 );
-			CGFloat saturation = ( arc4random() % 128 / 256.0 ) + 0.5;
-			CGFloat brightness = ( arc4random() % 128 / 256.0 ) + 0.5;
-			UIColor *color = [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:1];
-			UIImage *imageToRender = [self imageFromColor:color];
+		UIImage *image = [self imageFromColor:[self randomColor]];
 		
 		@autoreleasepool {
 			UIGraphicsBeginPDFPage();
-			[imageToRender drawAtPoint:CGPointZero];
+			[image drawAtPoint:CGPointZero];
 		}
-		
-		[pdfURLs addObject:[NSURL fileURLWithPath:pdfFile]];
-		
 	}
 	
 	UIGraphicsEndPDFContext();
 	
-	//[self combinePDFURLs:pdfURLs writeToURL:[NSURL fileURLWithPath:documentDirectoryFilename]];
+	aFilename = @"test_merge.pdf";
+	documentDirectoryFilename = [documentDirectory stringByAppendingPathComponent:aFilename];
 	
+	// Render image to PDF file and merging 1000 pdf files to one PDF File
+	
+	NSMutableArray *pdfURLs = [NSMutableArray array];
+	for (NSInteger i = 0; i < 1000; ++i) {
+	
+		NSString *pdfFile = [NSString stringWithFormat:@"%@_%@.%@", documentDirectoryFilename.stringByDeletingPathExtension, @(i), documentDirectoryFilename.pathExtension];
+		UIImage *imageToRender = [self imageFromColor:[self randomColor]];
+		
+		@autoreleasepool {
+			UIGraphicsBeginPDFContextToFile(pdfFile, CGRectMake(0, 0, 1024, 1024), nil);
+			UIGraphicsBeginPDFPage();
+			[imageToRender drawAtPoint:CGPointZero];
+			UIGraphicsEndPDFContext();
+		}
+		
+		[pdfURLs addObject:[NSURL fileURLWithPath:pdfFile]];
+	}
+	
+	[self combinePDFURLs:pdfURLs writeToURL:[NSURL fileURLWithPath:documentDirectoryFilename]];
+	
+	for (NSURL *pdfUrl in pdfURLs) {
+		[[NSFileManager defaultManager] removeItemAtURL:pdfUrl error:nil];
+	}
 }
 
 - (void)combinePDFURLs:(NSArray *)PDFURLs writeToURL:(NSURL *)URL
@@ -88,6 +102,14 @@
 	UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
 	UIGraphicsEndImageContext();
 	return image;
+}
+
+- (UIColor *)randomColor
+{
+	CGFloat hue = (arc4random() % 256 / 256.0);
+	CGFloat saturation = (arc4random() % 128 / 256.0 ) + 0.5;
+	CGFloat brightness = (arc4random() % 128 / 256.0 ) + 0.5;
+	return [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:1];
 }
 
 @end
