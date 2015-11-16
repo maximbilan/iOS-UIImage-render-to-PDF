@@ -14,7 +14,8 @@
 
 @implementation ViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
 	[super viewDidLoad];
 	
 	NSArray *documentDirectories = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask,YES);
@@ -79,7 +80,6 @@
 		for (size_t pageNumber = 1; pageNumber <= numberOfPages; ++pageNumber) {
 			CGPDFPageRef page = CGPDFDocumentGetPage(document, pageNumber);
 			CGRect mediaBox = CGPDFPageGetBoxRect(page, kCGPDFMediaBox);
-			
 			CGContextBeginPage(context, &mediaBox);
 			CGContextDrawPDFPage(context, page);
 			CGContextEndPage(context);
