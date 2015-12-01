@@ -49,17 +49,16 @@
 	NSMutableArray *pdfURLs = [NSMutableArray array];
 	for (NSInteger i = 0; i < 1000; ++i) {
 	
-		NSString *pdfFile = [NSString stringWithFormat:@"%@_%@.%@", documentDirectoryFilename.stringByDeletingPathExtension, @(i), documentDirectoryFilename.pathExtension];
-		UIImage *imageToRender = [self imageFromColor:[self randomColor]];
-		
 		@autoreleasepool {
+			NSString *pdfFile = [NSString stringWithFormat:@"%@_%@.%@", documentDirectoryFilename.stringByDeletingPathExtension, @(i), documentDirectoryFilename.pathExtension];
+			UIImage *imageToRender = [self imageFromColor:[self randomColor]];
 			UIGraphicsBeginPDFContextToFile(pdfFile, CGRectMake(0, 0, 1024, 1024), nil);
 			UIGraphicsBeginPDFPage();
 			[imageToRender drawAtPoint:CGPointZero];
 			UIGraphicsEndPDFContext();
+			
+			[pdfURLs addObject:[NSURL fileURLWithPath:pdfFile]];
 		}
-		
-		[pdfURLs addObject:[NSURL fileURLWithPath:pdfFile]];
 	}
 	
 	[self combinePDFURLs:pdfURLs writeToURL:[NSURL fileURLWithPath:documentDirectoryFilename]];
