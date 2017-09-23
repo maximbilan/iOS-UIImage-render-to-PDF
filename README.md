@@ -2,7 +2,7 @@
 
 ![alt tag](https://raw.github.com/maximbilan/iOS-UIImage-render-to-PDF/master/img/img1.png)
 
-Some code samples for working with <i>PDF</i>. Let’s try to generate 1000 images and render to <i>PDF</i> file. For this we need method for generating random color and method for creating <i>UIImage</i> from <i>UIColor</i>.
+Some code samples for working with <i>PDF</i>. Let’s try to generate 1000 images and render to <i>PDF</i> file. For this, we need a method for generating random color and a method for creating <i>UIImage</i> from <i>UIColor</i>.
 
 Random color:
 
@@ -49,9 +49,9 @@ for (NSInteger i = 0; i < 1000; ++i) {
 UIGraphicsEndPDFContext();
 </pre>
 
-<b>Attention!</b> Necessarily use <i>@autoreleasepool</i>, otherwise you will have memory leaks.
+<b>Attention!</b> Necessarily use <i>@autoreleasepool</i>, otherwise, you will have memory leaks.
 
-Also I would like to provide some sample for generating <i>PDF</i> files and merging these files. It’s also simple.
+Also, I would like to provide some sample for generating <i>PDF</i> files and merging these files. It’s also simple.
 
 <pre>
 NSMutableArray *pdfURLs = [NSMutableArray array];
