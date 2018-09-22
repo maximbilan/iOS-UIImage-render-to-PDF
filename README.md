@@ -2,9 +2,9 @@
 
 ![alt tag](https://raw.github.com/maximbilan/iOS-UIImage-render-to-PDF/master/img/img1.png)
 
-Some code samples for working with <i>PDF</i>. Let’s try to generate 1000 images and render to <i>PDF</i> file. For this, we need a method for generating random color and a method for creating <i>UIImage</i> from <i>UIColor</i>.
+Some code samples for working with <i>PDF</i>. Let’s try to generate 1000 images and render to <i>PDF</i> file. For this, we need a method for generating a random color and a method for creating <i>UIImage</i> from <i>UIColor</i>.
 
-Random color:
+A random color:
 
 <pre>
 - (UIColor *)randomColor
@@ -104,7 +104,7 @@ And of course, implementation of <i>combinePDFURLs</i> method, see below:
 }
 </pre>
 
-And result:
+And the result:
 
 ![alt tag](https://raw.github.com/maximbilan/iOS-UIImage-render-to-PDF/master/img/img2.png)
 
